@@ -8,6 +8,7 @@ finance_analyzer::finance_analyzer(){}
 void finance_analyzer::analyze(const fs::path& path)
 {
   path_to_ftp = path;
+  const std::string docs = "docs";
   if (!fs::exists(path_to_ftp))
     throw std::string ("Error: no such directory");
   if (!fs::is_directory(path_to_ftp))
@@ -16,7 +17,7 @@ void finance_analyzer::analyze(const fs::path& path)
   {
     if (!fs::is_directory(broker_directory)) continue;
     std::string current_broker = broker_directory.path().filename().string();
-    if (current_broker == "docs") continue;
+    if (current_broker == docs) continue;
     for (const auto &iter : fs::directory_iterator(broker_directory))
     {
       parse_component(iter.path(), current_broker);
@@ -49,9 +50,10 @@ std::ostream& operator<<(std::ostream& out, finance_analyzer& fin)
 
 std::string finance_analyzer::filename_number(const std::string& filename) const
 {
-  std::string number_str = filename.substr(filename.find('_') + 1,
+  const char underscore = '_';
+  std::string number_str = filename.substr(filename.find(underscore) + 1,
                                            filename.size() - 1);
-  number_str = number_str.substr(0, number_str.find('_'));
+  number_str = number_str.substr(0, number_str.find(underscore));
   return number_str;
 }
 
