@@ -14,7 +14,6 @@ class account
   void add_filename(const std::string& f);
   const std::string& get_broker() const;
   void set_broker(const std::string& broker);
-  std::ostream& print_info(std::ostream& out);
   friend std::ostream& operator<<(std::ostream &out, account& acc);
   const std::string& get_number() const;
   void set_number(const std::string& number);

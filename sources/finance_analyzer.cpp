@@ -5,11 +5,6 @@
 
 finance_analyzer::finance_analyzer(){}
 
-std::ostream& finance_analyzer::print_info(std::ostream& out)
-{
-  return out;
-}
-
 void finance_analyzer::analyze(const fs::path& path)
 {
   path_to_ftp = path;
@@ -50,7 +45,6 @@ std::ostream& operator<<(std::ostream& out, finance_analyzer& fin)
   out << std::endl << "All accounts data" << std::endl;
   for (const auto &acc : fin.accounts) out << *acc;
   return out;
-  //return fin.print_info(out);
 }
 
 std::string finance_analyzer::filename_number(const std::string& filename) const
@@ -65,7 +59,6 @@ void finance_analyzer::parse_component(
     const fs::path& p,
     const std::string& current_broker)
 {
-  // let all files have correct names
   fs::path component_path = p;
   if (fs::is_symlink(p)) component_path = fs::read_symlink(p);
   if (!fs::exists(component_path)) return;
@@ -99,27 +92,31 @@ void finance_analyzer::parse_component(
 }
 
 bool finance_analyzer::filename_is_valid(const fs::path& path_to_file) {
-  if (path_to_file.extension() != ".txt") return false;
+  const std::string txt_extension = ".txt";
+  const std::string balance = "balance";
+  const std::string digits = "0123456789";
+  const char underscore = '_';
+  const int number_len = 8;
+  const int date_len = 8;
+  if (path_to_file.extension() != txt_extension) return false;
   else if (path_to_file.stem().has_extension())
     return false;
   std::string filename = path_to_file.stem().filename().string();
-  size_t underscore_pos = filename.find('_');
+  size_t underscore_pos = filename.find(underscore);
   std::string tmp;
   if (underscore_pos) tmp = filename.substr(0, underscore_pos);
   else return false;
-  if (tmp != "balance") return false;
+  if (tmp != balance) return false;
   filename = filename.substr(underscore_pos + 1, filename.size());
-  underscore_pos = filename.find('_');
+  underscore_pos = filename.find(underscore);
   if (!underscore_pos) return false;
   else {
     tmp = filename.substr(0, underscore_pos);
-    //std::cout << tmp << "///" ;
-    if (tmp.size() != 8) return false;
-    if (tmp.find_first_not_of("0123456789") != std::string::npos) return false;
+    if (tmp.size() != number_len) return false;
+    if (tmp.find_first_not_of(digits) != std::string::npos) return false;
     tmp = filename.substr( underscore_pos + 1, filename.size());
-    if (tmp.size() != 8) return false;
-    //std::cout << tmp << std::endl;
-    if (tmp.find_first_not_of("0123456789") != std::string::npos) return false;
+    if (tmp.size() != date_len) return false;
+    if (tmp.find_first_not_of(digits) != std::string::npos) return false;
   }
   return true;
 }

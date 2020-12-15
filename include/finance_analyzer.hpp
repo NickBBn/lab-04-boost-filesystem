@@ -9,13 +9,11 @@
 #include "account.hpp"
 #include "boost/filesystem.hpp"
 
-//using namespace boost;
 namespace fs = boost::filesystem;
 class finance_analyzer {
  public:
   explicit finance_analyzer();
   void analyze(const fs::path& path);
-  std::ostream& print_info(std::ostream& out);
   std::string filename_number(const std::string& filename) const;
   void parse_component(const fs::path& p,
                        const std::string& current_broker);

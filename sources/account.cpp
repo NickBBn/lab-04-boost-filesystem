@@ -23,10 +23,6 @@ std::ostream& operator<<(std::ostream& out, account& acc) {
   return out;
 }
 
-std::ostream& account::print_info(std::ostream& out) {
-  return out;
-}
-
 void account::find_last_date()
 {
   last_date = get_date(filenames[0]);
@@ -36,10 +32,13 @@ void account::find_last_date()
     if (last_date < f) last_date = f;
   }
 }
-std::string account::get_date(const std::string& filename) const {
-  std::string date = filename.substr(filename.find('_') + 1,
-                                     filename.find('.'));
-  date = date.substr(date.find('_') + 1, date.size()-1);
+std::string account::get_date(const std::string& filename) const
+{
+  const char dot = '.';
+  const char underscore = '_';
+  std::string date = filename.substr(filename.find(underscore) + 1,
+                                     filename.find(dot) -
+                                         filename.find(underscore) - 1);
+  date = date.substr(date.find(underscore) + 1);
   return date;
-  //return filename;
 }
