@@ -1,6 +1,4 @@
-//
-// Created by nickmint on 12/13/20.
-//
+// Copyright 2020 NickBBn nickgeo.winner@gmail.com
 
 #include "account.hpp"
 const std::string& account::get_broker() const { return broker; }

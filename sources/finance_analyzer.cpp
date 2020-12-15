@@ -1,4 +1,4 @@
-// Copyright 2020 Your Name <your_email>
+// Copyright 2020 NickBBn nickgeo.winner@gmail.com
 
 #include <finance_analyzer.hpp>
 #include <sstream>

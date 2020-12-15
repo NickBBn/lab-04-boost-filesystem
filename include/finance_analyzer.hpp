@@ -1,6 +1,4 @@
-//
-// Created by nickmint on 12/11/20.
-//
+// Copyright 2020 NickBBn nickgeo.winner@gmail.com
 
 #ifndef TEMPLATE_FINANCE_ANALYZER_HPP
 #define TEMPLATE_FINANCE_ANALYZER_HPP

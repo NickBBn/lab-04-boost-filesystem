@@ -1,6 +1,4 @@
-//
-// Created by nickmint on 12/13/20.
-//
+// Copyright 2020 NickBBn nickgeo.winner@gmail.com
 
 #ifndef TEMPLATE_ACCOUNT_HPP
 #define TEMPLATE_ACCOUNT_HPP

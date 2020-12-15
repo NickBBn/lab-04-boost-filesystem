@@ -1,3 +1,5 @@
+// Copyright 2020 NickBBn nickgeo.winner@gmail.com
+
 #include <boost/filesystem.hpp>
 #include <finance_analyzer.hpp>
 #include <iostream>
